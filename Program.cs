@@ -58,16 +58,48 @@ while (wantToPlay)
 
     while (playerAlive == true && playerWin == false)
     {
+        // What Cards will the player Choose
+        var cards = AnsiConsole.Prompt(
+            new MultiSelectionPrompt<string>()
+                .Title("Select your [green]cards[/]?")
+                .NotRequired() // Not required to have a favorite fruit
+                .PageSize(10)
+                .MoreChoicesText("[grey](Move up and down to reveal more fruits)[/]")
+                .InstructionsText(
+                    "[grey](Press [blue]<space>[/] to toggle a card, " +
+                    "[green]<enter>[/] to accept)[/]")
+                .AddChoices(new[] {
+            "vendetta", "vendetta1", "vendetta2",
+            "vendetta3", "vendetta4",
+                }));
+
+        // Write the selected fruits to the terminal
+        //foreach (string card in cards)
+        //{
+        //    AnsiConsole.WriteLine(card);
+        //}
+
         //Starting Deck Size
         int deckSize = 5;
 
+        //var cards = new List<string>() { "vendetta", "vendetta1", "vendetta2", "vendetta3", "vendetta4" };
+
         // Initiates the starting deck
-        Deck playerDeck = new Deck(deckSize, new string[deckSize]);
+        Deck playerDeck = new Deck(deckSize, cards);
 
         // Loads the player with all of the base stats, and the player stores the inventory
         Player player = new Player(Modifiers.playerName(), Modifiers.maxPlayerHealth(), Modifiers.playerHealth(), Modifiers.playerStrength(), Modifiers.playerCurrentDamage(),
             Modifiers.playerBaseDamage(), Modifiers.playerStartingLevel(), Modifiers.playerXP(), Modifiers.playerCritChance(), Modifiers.playerCritDamage(),
             Modifiers.playerEvasiveness(), Modifiers.playerLuck(), playerDeck, Modifiers.playerAlive());
+
+        // User Options
+        var cardChoice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .PageSize(10)
+                .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
+                .AddChoices((cards)));
+
+        Cards.playCard(player, cardChoice);
 
         // Load state of player after first level
         //player = Level.Level1(player);
@@ -109,6 +141,10 @@ while (wantToPlay)
         if (playerWin)
         {
             Console.WriteLine("You beat the Game!!!");
+        }
+        else
+        {
+            Console.WriteLine("You Died...");
         }
     }
 }

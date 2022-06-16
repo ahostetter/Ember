@@ -3,9 +3,9 @@
     internal class Deck
     {
         public int deckSize;
-        public string[] cards;
+        public List<string> cards;
 
-        public Deck(int aDeckSize, string[] aCards)
+        public Deck(int aDeckSize, List<string> aCards)
         {
             deckSize = aDeckSize;
             cards = aCards;
