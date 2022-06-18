@@ -85,8 +85,7 @@ while (wantToPlay)
 
         Cards.playCard(player, cardChoice);
 
-        // Load state of player after first level
-        //player = Level.Level1(player);
+        Cards.winCard(player);
 
         // Checks to make sure player is still alive and if he is then load state of player into Second Level
         if (player.alive)
