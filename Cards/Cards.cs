@@ -6,12 +6,18 @@ namespace Ember
     {
         public string name;
         public double damage;
+        public int cardID;
 
-        public Cards(string aName, double aDamage)
+        public Cards(string aName, double aDamage, int aCardID)
         {
             name = aName;
             damage = aDamage;
+            cardID = aCardID;
         }
+
+        //All cards the player can choose from
+        public static string[] allCardsNames = new string[] { "Vendetta", "Vendetta1", "Vendetta2", "Vendetta3", "Vendetta4" };
+
 
         public static void winCard(Player player)
         {
@@ -39,10 +45,7 @@ namespace Ember
                     .InstructionsText(
                         "[grey](Press [blue]<space>[/] to toggle a card, " +
                         "[green]<enter>[/] to accept)[/]")
-                    .AddChoices(new[] {
-            "vendetta", "vendetta1", "vendetta2",
-            "vendetta3", "vendetta4",
-                    }));
+                    .AddChoices(Cards.allCardsNames));
 
                 if (cards.Count <= deckSize)
                 {
@@ -60,28 +63,28 @@ namespace Ember
         }
         public static void playCard(Player player, String playerCardChoice)
         {
-            if (playerCardChoice == "vendetta")
+            if (playerCardChoice == "Vendetta")
             {
                 vendetta(player);
                 player.deck.cards.Remove(playerCardChoice);
                 //player.deck.cards.ForEach(card => Console.Write(card + ","));
             }
-            else if (playerCardChoice == "vendetta1")
+            else if (playerCardChoice == "Vendetta1")
             {
                 vendetta1(player);
                 player.deck.cards.Remove(playerCardChoice);
             }
-            else if (playerCardChoice == "vendetta2")
+            else if (playerCardChoice == "Vendetta2")
             {
                 vendetta2(player);
                 player.deck.cards.Remove(playerCardChoice);
             }
-            else if (playerCardChoice == "vendetta3")
+            else if (playerCardChoice == "Vendetta3")
             {
                 vendetta3(player);
                 player.deck.cards.Remove(playerCardChoice);
             }
-            else if (playerCardChoice == "vendetta4")
+            else if (playerCardChoice == "Vendetta4")
             {
                 vendetta4(player);
                 player.deck.cards.Remove(playerCardChoice);
@@ -90,7 +93,7 @@ namespace Ember
 
         public static void vendetta(Player player)
         {
-            Cards card = new Cards("Vendetta", 300);
+            Cards card = new Cards("Vendetta", 300, 1);
 
             player.alive = false;
 

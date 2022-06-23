@@ -4,7 +4,7 @@
     {
         public static string playerName()
         {
-            string name = "Zemphas";
+            string name = "Artemis";
             return name;
         }
 
