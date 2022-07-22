@@ -5,12 +5,14 @@ namespace Ember
     internal class Cards
     {
         public string name;
+        public string description;
         public double damage;
         public int cardID;
 
-        public Cards(string aName, double aDamage, int aCardID)
+        public Cards(string aName, string aDescription, double aDamage, int aCardID)
         {
             name = aName;
+            description = aDescription;
             damage = aDamage;
             cardID = aCardID;
         }
@@ -93,7 +95,7 @@ namespace Ember
 
         public static void vendetta(Player player)
         {
-            Cards card = new Cards("Vendetta", 300, 1);
+            Cards card = new Cards("Vendetta","Test Description", 300, 1);
 
             player.alive = false;
 
